@@ -1,4 +1,4 @@
-package starships;
+package net.jeffcoat.starships;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
