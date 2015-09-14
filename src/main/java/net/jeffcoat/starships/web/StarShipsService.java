@@ -22,6 +22,23 @@ public class StarShipsService {
         restTemplate = new RestTemplate(requestFactory);
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public RestTemplate getRestTemplate() {
 		return restTemplate;
 	}
