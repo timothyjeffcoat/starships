@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.swapi.models.People;
 import com.swapi.models.SWModelList;
 import com.swapi.models.Starship;
 
@@ -40,4 +41,15 @@ public class IndexController {
     	System.out.println("Exiting viewStarShip");
     	return mav;
     }
+    
+    @RequestMapping(value = "/viewpilots", method = RequestMethod.GET)
+    public ModelAndView viewPilots(@RequestParam(value="id") int id,Model model) {
+    	System.out.println("Entered viewPilots");
+    	People pilot = service.infoOnPilotByShip(id);
+    	ModelAndView mav = new ModelAndView("pilot");
+    	model.addAttribute("pilot", pilot);
+    	mav.addObject("pilot", pilot);
+    	return mav;
+    }
+    
 }
