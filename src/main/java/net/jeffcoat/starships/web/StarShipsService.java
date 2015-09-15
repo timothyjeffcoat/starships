@@ -2,6 +2,8 @@ package net.jeffcoat.starships.web;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import org.apache.http.impl.client.HttpClients;
@@ -247,7 +249,51 @@ public class StarShipsService {
 		return found_ship;
 	}	
 	
-	
+	/**
+	 * provide a sorted list of starships based on price
+	 * @return
+	 */
+	public SWModelList<Starship> sortListByPrice(boolean asc) {
+		
+		ArrayList<Starship> ships = getCachedShips().results;
+		
+		Comparator comparator = new Comparator<Starship>() {
+			@Override
+			public int compare(Starship e1, Starship e2) {
+				Float costInCreditsE1 = 0F;
+				Float costInCreditE2 = 0F;
+				if (e1.getCostInCredits() != null && !e1.getCostInCredits().equalsIgnoreCase("unknown")) {
+					costInCreditsE1 = Float.parseFloat(e1.getCostInCredits());
+				}
+				if (e2.getCostInCredits() != null && !e2.getCostInCredits().equalsIgnoreCase("unknown")) {
+					costInCreditE2 = Float.parseFloat(e2.getCostInCredits());
+				}
+				return costInCreditsE1.compareTo(costInCreditE2);
+
+			}
+		};
+		Comparator comparatorRev = new Comparator<Starship>() {
+			@Override
+			public int compare(Starship e1, Starship e2) {
+				Float costInCreditsE1 = 0F;
+				Float costInCreditE2 = 0F;
+				if (e1.getCostInCredits() != null && !e1.getCostInCredits().equalsIgnoreCase("unknown")) {
+					costInCreditsE1 = Float.parseFloat(e1.getCostInCredits());
+				}
+				if (e2.getCostInCredits() != null && !e2.getCostInCredits().equalsIgnoreCase("unknown")) {
+					costInCreditE2 = Float.parseFloat(e2.getCostInCredits());
+				}
+				return costInCreditE2.compareTo(costInCreditsE1);
+
+			}
+		};
+		if(asc){
+			Collections.sort(ships,comparator);
+		}else{
+			Collections.sort(ships,comparatorRev);
+		}
+		return getCachedShips();
+	}	
 	
 	
 	

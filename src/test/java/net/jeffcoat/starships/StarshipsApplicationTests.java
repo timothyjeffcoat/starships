@@ -41,6 +41,9 @@ public class StarshipsApplicationTests {
     	
     	ships = service.filterListByPrice(300000F,500000F);
     	assertEquals(1,ships.results.size());
+
+    	ships = service.sortListByPrice(false);
+    	assertEquals("1000000000000",ships.results.get(0).getCostInCredits());
     	
 	}
 

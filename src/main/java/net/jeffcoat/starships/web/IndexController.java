@@ -86,4 +86,18 @@ public class IndexController {
     	return mav;
     }
     
+    @RequestMapping(value = "/sortprice", method = RequestMethod.GET)
+    public ModelAndView sortPrice(
+    		@RequestParam(value="asc") boolean asc,
+    		Model model) {
+    	System.out.println("Entered sortPrice");
+    	SWModelList<Starship> json = service.sortListByPrice(asc);
+    	ModelAndView mav = new ModelAndView("index");
+    	mav.addObject("count", json.count);
+    	mav.addObject("starships", json.results);
+    	mav.addObject("asc", !asc);
+    	System.out.println("Exiting sortPrice");
+    	return mav;
+    }
+    
 }
