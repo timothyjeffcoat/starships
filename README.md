@@ -1,7 +1,10 @@
 # starships
 Star Wars Star Ships Are Us! Come buy a star ship from us.
 
-My plan is to get heroku instance running for online demo purpose but in the mean time try to run it yourself .
+An online demo is available at an Heroku instance https://cryptic-beach-6399.herokuapp.com
+
+
+You can also run the app yourself by following instructions below.
 
 Dependencies
 
