@@ -38,6 +38,23 @@ public class StarShipsService {
 		
 	}
 	
+	
+	/**
+	 * Retrieve all star ships
+	 * @return
+	 */
+	public SWModelList<Starship> listAllShips() {
+		int page = 1;
+		SWModelList<Starship> all_ships = null;
+		if(getCachedShips()==null){
+			all_ships = listOfShips(page); 
+		}else{
+			all_ships = getCachedShips(); 
+		}
+		
+		return all_ships;
+	}
+	
 	/**
 	 * Grab all ships located in the Star Wars API 
 	 * 

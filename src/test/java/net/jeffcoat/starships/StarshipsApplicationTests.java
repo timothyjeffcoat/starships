@@ -1,8 +1,13 @@
 package net.jeffcoat.starships;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.web.WebAppConfiguration;
+
+import com.swapi.models.SWModelList;
+import com.swapi.models.Starship;
 
 import net.jeffcoat.starships.StarshipsApplication;
 import net.jeffcoat.starships.web.StarShipsService;
@@ -21,6 +26,9 @@ public class StarshipsApplicationTests {
 	
 	@Test
 	public void contextLoads() {
+		SWModelList<Starship> ships = service.listAllShips();
+		assertEquals(37,ships.count);		
+		
 	}
 
 }
