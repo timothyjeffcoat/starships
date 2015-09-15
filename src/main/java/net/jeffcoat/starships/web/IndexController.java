@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.swapi.models.SWModelList;
@@ -28,4 +29,15 @@ public class IndexController {
     	return mav;
     }
 
+    @RequestMapping(value = "/viewss", method = RequestMethod.GET)
+    public ModelAndView viewStarShip(@RequestParam(value="id") int id,Model model) {
+    	System.out.println("Entered viewStarShip");
+    	System.out.println("id: " +id);
+    	SWModelList<Starship> json = service.seeIndividualStarship(id);
+    	ModelAndView mav = new ModelAndView("starship");
+    	mav.addObject("starships", json.results);
+    	model.addAttribute("starships", json.results);
+    	System.out.println("Exiting viewStarShip");
+    	return mav;
+    }
 }
