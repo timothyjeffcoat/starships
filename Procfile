@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -jar target/starships-0.0.1-SNAPSHOT.jar
+java -jar
