@@ -176,6 +176,34 @@ public class StarShipsService {
 		return pilot;
 	}
 	
+	/**
+	 * Search for ship by name
+	 * @param shipName
+	 * @return
+	 */
+	public SWModelList<Starship> searchForStarshipByName(String shipName) {
+		System.out.println("Entered searchForStarshipByName");
+		SWModelList<Starship> found_ship = new SWModelList<Starship>() ; 
+		if(getCachedShips()!=null){
+			// find ship in array list with given ship name somewhere in its name
+			for (Starship ship : getCachedShips().results) {
+				if (ship.getName() != null && ship.getName().contains("" + shipName + "")) {
+					ArrayList<Starship> s = new ArrayList<Starship>();
+					s.add(ship);
+					addShipsToList(found_ship,s);
+				}
+			}
+		}
+		if(found_ship.results.size()>0){
+			System.out.println("count of searched ships: " + found_ship.results.size());
+			found_ship.count = found_ship.results.size(); 
+			System.out.println("Exiting searchForStarshipByName with a ship ");
+			return found_ship;
+			
+		}
+		System.out.println("Exiting searchForStarshipByName without a ship");
+		return found_ship;
+	}
 	
 	
 	

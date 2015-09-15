@@ -35,7 +35,10 @@ public class StarshipsApplicationTests {
 
     	People pilot = service.infoOnPilotByShip(13);
     	assertEquals("Chewbacca",pilot.getName());
-		
+
+    	ships = service.searchForStarshipByName("Sentinel-class landing craft");
+    	assertEquals("Sentinel-class landing craft",ships.results.get(0).getName());
+    	
 	}
 
 }
