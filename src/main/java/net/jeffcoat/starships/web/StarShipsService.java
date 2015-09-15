@@ -20,6 +20,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
 import com.swapi.APIConstants;
+import com.swapi.models.People;
 import com.swapi.models.SWModelList;
 import com.swapi.models.Starship;
 
@@ -149,6 +150,31 @@ public class StarShipsService {
 		return found_ship;
 	}
 	
+	/**
+	 * Retrieve pilot for given pilot id
+	 * 
+	 * @param pilotId
+	 * @return
+	 */
+	public People infoOnPilotByShip(int pilotId) {
+        // get individual pilot
+		System.out.println("Entered infoOnPilotByShip");
+        ResponseEntity<String>  json_results = restTemplate.getForEntity(APIConstants.BASE_PEOPLE_URL+pilotId, String.class);
+        String json_of_pilot = json_results.getBody().toString();
+        
+        Type collectionType = new TypeToken<People>() {}.getType();
+        
+		// convert json to java object
+        JsonObject json = new JsonParser().parse(json_of_pilot).getAsJsonObject();
+        
+		Gson gson = new Gson();
+		People pilot = gson.fromJson(json, collectionType);
+        
+        System.out.println("name of pilot: "+pilot.getName());
+		System.out.println("Pilot: "+json_of_pilot);
+		System.out.println("Exiting infoOnPilotByShip");
+		return pilot;
+	}
 	
 	
 	

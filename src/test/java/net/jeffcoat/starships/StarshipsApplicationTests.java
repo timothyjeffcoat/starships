@@ -6,6 +6,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.web.WebAppConfiguration;
 
+import com.swapi.models.People;
 import com.swapi.models.SWModelList;
 import com.swapi.models.Starship;
 
@@ -31,6 +32,9 @@ public class StarshipsApplicationTests {
 		
 		ships = service.seeIndividualStarship(5);
 		assertEquals(1,ships.results.size());
+
+    	People pilot = service.infoOnPilotByShip(13);
+    	assertEquals("Chewbacca",pilot.getName());
 		
 	}
 
