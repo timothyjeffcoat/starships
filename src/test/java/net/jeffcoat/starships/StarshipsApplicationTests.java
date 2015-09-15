@@ -29,6 +29,9 @@ public class StarshipsApplicationTests {
 		SWModelList<Starship> ships = service.listAllShips();
 		assertEquals(37,ships.count);		
 		
+		ships = service.seeIndividualStarship(5);
+		assertEquals(1,ships.results.size());
+		
 	}
 
 }

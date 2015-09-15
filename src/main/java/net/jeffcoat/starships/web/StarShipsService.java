@@ -123,6 +123,31 @@ public class StarShipsService {
 		}
 	}
 	
+	/**
+	 * Return the star ship with the given id
+	 * 
+	 * @param shipId
+	 * @return
+	 */
+	public SWModelList<Starship>  seeIndividualStarship(int shipId) {
+		// INDIVIDUAL SHIP
+		System.out.println("Entered seeIndividualStarship");
+		SWModelList<Starship> found_ship = new SWModelList<Starship>() ; 
+		if(getCachedShips()!=null){
+			// find ship in array list with given ship id
+			for (Starship ship : getCachedShips().results) {
+				if (ship.getUrl() != null && ship.getUrl().contains("/" + shipId + "/")) {
+					ArrayList<Starship> s = new ArrayList<Starship>();
+					s.add(ship);
+					found_ship.results = s;
+					System.out.println("Exiting seeIndividualStarship with a ship"+ship.getName());
+					return found_ship;
+				}
+			}
+		}
+		System.out.println("Exiting seeIndividualStarship without a ship");
+		return found_ship;
+	}
 	
 	
 	
