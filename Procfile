@@ -1,1 +1,1 @@
-java -jar
+java -jar starships-0.0.1-SNAPSHOT.jar
