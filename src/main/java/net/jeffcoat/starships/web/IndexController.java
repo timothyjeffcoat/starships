@@ -52,4 +52,15 @@ public class IndexController {
     	return mav;
     }
     
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public ModelAndView searchShips(@RequestParam(value="name") String shipName,Model model) {
+    	System.out.println("Entered searchShips");
+    	SWModelList<Starship> ships = service.searchForStarshipByName(shipName);
+    	ModelAndView mav = new ModelAndView("index");
+    	mav.addObject("count", ships.count);
+    	model.addAttribute("starships", ships.results);
+    	mav.addObject("starships", ships.results);
+    	System.out.println("Exiting searchShips");
+    	return mav;
+    }    
 }
