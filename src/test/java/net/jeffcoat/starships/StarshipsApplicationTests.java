@@ -39,6 +39,9 @@ public class StarshipsApplicationTests {
     	ships = service.searchForStarshipByName("Sentinel-class landing craft");
     	assertEquals("Sentinel-class landing craft",ships.results.get(0).getName());
     	
+    	ships = service.filterListByPrice(300000F,500000F);
+    	assertEquals(1,ships.results.size());
+    	
 	}
 
 }

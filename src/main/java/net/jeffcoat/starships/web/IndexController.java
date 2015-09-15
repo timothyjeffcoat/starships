@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.swapi.models.People;
 import com.swapi.models.SWModelList;
@@ -62,5 +63,27 @@ public class IndexController {
     	mav.addObject("starships", ships.results);
     	System.out.println("Exiting searchShips");
     	return mav;
-    }    
+    }
+    
+    @RequestMapping(value = "/filterbyprice", method = RequestMethod.GET)
+    public ModelAndView filterByPrice(
+    		@RequestParam(value="filterByPriceLow") Float filterByPriceLow,
+    		@RequestParam(value="filterByPriceHigh") Float filterByPriceHigh,
+    		Model model,
+    		RedirectAttributes redir) {
+    	System.out.println("Entered filterByPrice");
+    	if(filterByPriceLow == null || filterByPriceLow == null){
+    		ModelAndView mavm = new ModelAndView("redirect:/");
+    		redir.addFlashAttribute("filterError","You must input values for both high and low prices");
+    		return mavm;
+    	}
+    	SWModelList<Starship> ships = service.filterListByPrice(filterByPriceLow,filterByPriceHigh);
+    	ModelAndView mav = new ModelAndView("index");
+    	mav.addObject("count", ships.count);
+    	model.addAttribute("starships", ships.results);
+    	mav.addObject("starships", ships.results);
+    	System.out.println("Exiting filterByPrice");
+    	return mav;
+    }
+    
 }

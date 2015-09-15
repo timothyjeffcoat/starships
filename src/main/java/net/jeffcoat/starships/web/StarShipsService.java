@@ -205,7 +205,47 @@ public class StarShipsService {
 		return found_ship;
 	}
 	
-	
+	/**
+	 * Returns a list of star ships filtered by indicated price
+	 * 
+	 * @param priceToFilterOn
+	 * @return
+	 */
+	public SWModelList<Starship> filterListByPrice(Float priceToFilterLow,Float priceToFilterHigh) {
+		System.out.println("Entered filterListByPrice");
+		System.out.println("priceToFilterLow " + priceToFilterLow);
+		System.out.println("priceToFilterHigh " + priceToFilterHigh);
+		SWModelList<Starship> found_ship = new SWModelList<Starship>() ;
+		
+		if(priceToFilterLow == null || priceToFilterHigh == null){
+			return getCachedShips();
+		}
+		
+		if(getCachedShips()!=null){
+			// find ship in array list within the price range indicated
+			for (Starship ship : getCachedShips().results) {
+				if (ship.getCostInCredits() != null && !ship.getCostInCredits().equalsIgnoreCase("unknown")) {
+					Float costInCredits = Float.parseFloat(ship.getCostInCredits());
+					if(costInCredits >= priceToFilterLow && costInCredits <= priceToFilterHigh){
+						ArrayList<Starship> s = new ArrayList<Starship>();
+						s.add(ship);
+						addShipsToList(found_ship,s);
+					}
+				}
+			}
+		}
+		
+		if(found_ship.results.size()>0){
+			System.out.println("count of filtered ships: " + found_ship.results.size());
+			found_ship.count = found_ship.results.size(); 
+			System.out.println("Exiting filterListByPrice with a ship ");
+			return found_ship;
+			
+		}
+		
+		System.out.println("Exiting filterListByPrice without a ship");
+		return found_ship;
+	}	
 	
 	
 	
