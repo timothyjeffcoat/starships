@@ -257,7 +257,7 @@ public class StarShipsService {
 		
 		ArrayList<Starship> ships = getCachedShips().results;
 		
-		Comparator comparator = new Comparator<Starship>() {
+		Comparator<Starship> comparator = new Comparator<Starship>() {
 			@Override
 			public int compare(Starship e1, Starship e2) {
 				Float costInCreditsE1 = 0F;
@@ -272,7 +272,7 @@ public class StarShipsService {
 
 			}
 		};
-		Comparator comparatorRev = new Comparator<Starship>() {
+		Comparator<Starship> comparatorRev = new Comparator<Starship>() {
 			@Override
 			public int compare(Starship e1, Starship e2) {
 				Float costInCreditsE1 = 0F;
